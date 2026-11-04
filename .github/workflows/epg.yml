@@ -22,7 +22,7 @@ jobs:
           python-version: "3.11"
 
       - name: Generar guia
-        run: python build_epg.py
+        run: python build epg.py
 
       - name: Verificar archivo
         run: test -s epg.json
