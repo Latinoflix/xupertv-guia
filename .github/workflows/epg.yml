@@ -1,35 +1,35 @@
 name: Actualizar guia EPG
 
 on:
-schedule:
-- cron: "0 */6 * * *"
-workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
 
 permissions:
-contents: write
+  contents: write
 
 jobs:
-actualizar:
-runs-on: ubuntu-latest
-steps:
-- name: Descargar repositorio
-uses: actions/checkout@v4
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
 
-- name: Configurar Python
-uses: actions/setup-python@v5
-with:
-python-version: "3.11"
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-- name: Generar guia
-run: python build_epg.py
+      - name: Generar guia
+        run: python build_epg.py
 
-- name: Verificar archivo
-run: test -s epg.json
+      - name: Verificar archivo
+        run: test -s epg.json
 
-- name: Publicar guia
-run: |
-git config user.name "github-actions[bot]"
-git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-git add epg.json
-git diff --cached --quiet || git commit -m "Actualizar guia EPG"
-git push
+      - name: Publicar guia
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add epg.json
+          git diff --cached --quiet || git commit -m "Actualizar guia EPG"
+          git push
