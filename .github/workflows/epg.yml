@@ -1,0 +1,17 @@
+name: Actualizar guia EPG
+
+on:
+schedule:
+- cron: "0 */6 * * *"
+workflow_dispatch:
+
+permissions:
+contents: write
+
+jobs:
+actualizar:
+runs-on: ubuntu-latest
+
+steps:
+- name: Descargar repositorio
+uses: actions/checkout@v4
